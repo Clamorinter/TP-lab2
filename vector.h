@@ -50,6 +50,7 @@ public:
 	}
 	T pop_back() //here can be std::exceptions class
 	{
+		T ret;
 		if (!head)
 		{
 			return 0; //throw
@@ -64,9 +65,52 @@ public:
 		{
 			cntr = cntr->next;
 		}
+		ret = cntr->next->value;
 		delete cntr->next;
 		cntr->next = nullptr;
-		
+		return ret;
+	}
+	T pop(int number)
+	{
+		T ret;
+		if (!head)
+		{
+			return 0; //throw
+		}
+		if (number == 0)
+		{
+			ret = head->value;
+			if (head->next != nullptr)
+			{
+				head = head->next;
+				delete head;
+				return ret;
+			}
+			delete head;
+			head = nullptr;
+			return ret;
+		}
+		vector_node<T>* cntr = head;
+		vector_node<T>* gap;
+		while (int i = 0; i < number-1; i++)
+		{
+			if (cntr == nullptr)
+			{
+				break;
+				return 0; //throw
+			}
+			cntr = cntr->next;
+		}
+		if (cntr->next == nullptr)
+		{
+			return 0; //throw;
+		}
+		ret = cntr->next->value;
+		gap = cntr->next->next;
+		delete cntr->next;
+		cntr->next = gap;
+		return ret;
+
 	}
 	
 	T& operator[] (int number)
