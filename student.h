@@ -23,7 +23,6 @@ public:
 	int delete_score(int number);
 
 	friend std::ostream& operator<< (std::ostream& os, const Student& stud);
-	friend std::istream& operator>> (std::istream& is, const Student& stud);
 
 	friend Student& operator>> (Student& stud, std::string FIO);
 	friend Student& operator>> (Student& stud, int group);

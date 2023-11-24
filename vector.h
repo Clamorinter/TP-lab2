@@ -17,11 +17,11 @@ public:
 			push_back(mas[i]);
 		}
 	}
-	vector(const vector& copy)
+	vector(const vector<T>& copy)
 	{
 		for (int i = 0; i < copy.length(); i++)
 		{
-			push_back(vector[i]);
+			push_back(copy[i]);
 		}
 	}
 
@@ -46,7 +46,7 @@ public:
 		{
 			cntr = cntr->next;
 		}
-		cntr->next = newNode
+		cntr->next = newNode;
 	}
 	T pop_back() //here can be std::exceptions class
 	{
@@ -92,7 +92,7 @@ public:
 		}
 		vector_node<T>* cntr = head;
 		vector_node<T>* gap;
-		while (int i = 0; i < number-1; i++)
+		for (int i = 0; i < number-1; i++)
 		{
 			if (cntr == nullptr)
 			{
@@ -116,7 +116,22 @@ public:
 	T& operator[] (int number)
 	{
 		vector_node<T>* cntr = head;
-		while (int i = 0; i < number; i++)
+		for (int i = 0; i < number; i++)
+		{
+			if (cntr == nullptr)
+			{
+				break;
+				return 0; //throw
+			}
+			cntr = cntr->next;
+		}
+		return cntr->value;
+	}
+
+	T operator[] (int number) const 
+	{
+		vector_node<T>* cntr = head;
+		for (int i = 0; i < number; i++)
 		{
 			if (cntr == nullptr)
 			{
@@ -130,7 +145,7 @@ public:
 
 	void clear()
 	{
-		vector_node<T>* cntr, prev;
+		vector_node<T>* cntr, *prev;
 		cntr = head;
 		if (!head)
 		{
@@ -146,7 +161,7 @@ public:
 		head = nullptr;
 	}
 
-	int length()
+	int length() const
 	{
 		if (!head)
 		{
