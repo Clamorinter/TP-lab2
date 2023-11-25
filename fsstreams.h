@@ -8,7 +8,8 @@ std::string vec_to_str(vector<char> vec)
 {
 	std::ostringstream os;
 	std::string str;
-	for (int i = 0; i < vec.length(); i++)
+	int n = vec.length();
+	for (int i = 0; i < n; i++)
 	{
 		os << vec[i];
 	}
@@ -62,12 +63,14 @@ vector<std::string> word_seperate(std::string text)
 bool checker(vector<std::string> words, std::string word)
 {
 	bool eqflag;
-	for (int i = 0; i < words.length(); i++)
+	int n = words.length();
+	int k = word.length();
+	for (int i = 0; i < n; i++)
 	{
 		eqflag = true;
-		if (word.length() == words[i].length())
+		if (k == words[i].length())
 		{
-			for (int j = 0; j < word.length(); j++)
+			for (int j = 0; j < k; j++)
 			{
 				if (word[j] != words[i][j])
 				{
@@ -88,7 +91,8 @@ vector<std::string> text_process(std::ifstream& fin, std::string word)
 {
 	vector<std::string> sentences = sent_seperate(fin);
 	vector<std::string> good_sentences;
-	for (int i = 0; i < sentences.length(); i++)
+	int n = sentences.length();
+	for (int i = 0; i < n; i++)
 	{
 		if (checker(word_seperate(sentences[i]), word))
 		{
