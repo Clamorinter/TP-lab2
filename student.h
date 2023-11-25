@@ -22,11 +22,14 @@ public:
 	void add_score(int grade);
 	int delete_score(int number);
 
+	Student& operator= (const Student& original);
+
 	friend std::ostream& operator<< (std::ostream& os, const Student& stud);
 
 	friend Student& operator>> (Student& stud, std::string FIO);
 	friend Student& operator>> (Student& stud, int group);
 	friend Student& operator>> (Student& stud, vector<int> score);
+
 private:
 	std::string FIO;
 	int group = 0;

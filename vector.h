@@ -136,11 +136,21 @@ public:
 			if (cntr == nullptr)
 			{
 				break;
-				return 0; //throw
+				throw; //throw
 			}
 			cntr = cntr->next;
 		}
 		return cntr->value;
+	}
+
+	vector<T>& operator= (const vector<T>& copy)
+	{
+		clear();
+		for (int i = 0; i < copy.length(); i++)
+		{
+			push_back(copy[i]);
+		}
+		return (*this);
 	}
 
 	void clear()

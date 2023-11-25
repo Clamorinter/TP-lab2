@@ -39,7 +39,6 @@ void Student::setGroup(int group)
 }
 void Student::setScore(vector<int> score)
 {
-	this->score.clear();
 	this->score = score;
 }
 
@@ -50,6 +49,14 @@ void Student::add_score(int grade)
 int Student::delete_score(int number)
 {
 	return score.pop(number);
+}
+
+Student& Student::operator= (const Student& original)
+{
+	this->FIO = original.getFIO();
+	this->group = original.getGroup();
+	this->score = original.getScore();
+	return (*this);
 }
 
 std::ostream& operator<< (std::ostream& os, const Student& stud)
