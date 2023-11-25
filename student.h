@@ -28,7 +28,7 @@ public:
 	friend Student& operator>> (Student& stud, int group);
 	friend Student& operator>> (Student& stud, vector<int> score);
 private:
-	std::string FIO = "\0";
+	std::string FIO;
 	int group = 0;
 	vector<int> score;
 };

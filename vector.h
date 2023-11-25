@@ -121,7 +121,7 @@ public:
 			if (cntr == nullptr)
 			{
 				break;
-				return 0; //throw
+				throw; //throw
 			}
 			cntr = cntr->next;
 		}
