@@ -6,6 +6,18 @@ struct vector_node {
 	vector_node* next = nullptr;
 };
 
+class vector_error : public std::exception
+{
+public:
+	vector_error(const std::string& message): message(message) {}
+	const char* what() const noexcept override
+	{
+		return message.c_str();
+	}
+private:
+	std::string message;
+};
+
 template<typename T>
 class vector {
 public:
@@ -19,7 +31,8 @@ public:
 	}
 	vector(const vector<T>& copy)
 	{
-		for (int i = 0; i < copy.length(); i++)
+		int n = copy.length();
+		for (int i = 0; i < n; i++)
 		{
 			push_back(copy[i]);
 		}
@@ -48,12 +61,12 @@ public:
 		}
 		cntr->next = newNode;
 	}
-	T pop_back() //here can be std::exceptions class
+	T pop_back()
 	{
 		T ret;
 		if (!head)
 		{
-			return 0; //throw
+			throw vector_error("Vector is empty");
 		}
 		if (head->next == nullptr)
 		{
@@ -73,17 +86,19 @@ public:
 	T pop(int number)
 	{
 		T ret;
+		vector_node<T>* gap;
 		if (!head)
 		{
-			return 0; //throw
+			throw vector_error("Vector is empty");
 		}
 		if (number == 0)
 		{
 			ret = head->value;
 			if (head->next != nullptr)
 			{
-				head = head->next;
+				gap = head->next;
 				delete head;
+				head = gap;
 				return ret;
 			}
 			delete head;
@@ -91,19 +106,18 @@ public:
 			return ret;
 		}
 		vector_node<T>* cntr = head;
-		vector_node<T>* gap;
 		for (int i = 0; i < number-1; i++)
 		{
 			if (cntr == nullptr)
 			{
 				break;
-				return 0; //throw
+				throw vector_error("There are no element to pop");
 			}
 			cntr = cntr->next;
 		}
 		if (cntr->next == nullptr)
 		{
-			return 0; //throw;
+			throw vector_error("There are no element to pop");
 		}
 		ret = cntr->next->value;
 		gap = cntr->next->next;
@@ -121,7 +135,7 @@ public:
 			if (cntr == nullptr)
 			{
 				break;
-				throw; //throw
+				throw vector_error("There are no element to return");
 			}
 			cntr = cntr->next;
 		}
@@ -136,7 +150,7 @@ public:
 			if (cntr == nullptr)
 			{
 				break;
-				throw; //throw
+				throw vector_error("There are no element to return");
 			}
 			cntr = cntr->next;
 		}
@@ -146,7 +160,8 @@ public:
 	vector<T>& operator= (const vector<T>& copy)
 	{
 		clear();
-		for (int i = 0; i < copy.length(); i++)
+		int n = copy.length();
+		for (int i = 0; i < n; i++)
 		{
 			push_back(copy[i]);
 		}
