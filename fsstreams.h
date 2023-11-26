@@ -28,7 +28,10 @@ vector<std::string> sent_seperate(std::ifstream& fin)
 		{
 			continue;
 		}
-		sentence.push_back(c);
+		if (c != '\n')
+		{
+			sentence.push_back(c);
+		}
 		if (c == '.' || c == '?' || c == '!')
 		{
 			sentences.push_back(vec_to_str(sentence));
@@ -46,7 +49,8 @@ vector<std::string> word_seperate(std::string text)
 	char c;
 	while ((c = is.get()) != EOF)
 	{
-		if (c == ' ' || c == '.' || c == '?' || c == '!' || c == ',' || c == ':' || c == ';' || c == '\'' || c == '\"' || c == '\n' || c == '\0')
+		if (c == ' ' || c == '.' || c == '?' || c == '!' || c == ',' || c == ':' || c == ';' || c == '(' || c == ')' || 
+			c == '\'' || c == '\"' || c == '\n' || c == '\0')
 		{
 			if (word.length() != 0)
 			{
@@ -64,7 +68,7 @@ bool checker(vector<std::string> words, std::string word)
 {
 	bool eqflag;
 	int n = words.length();
-	int k = word.length();
+	int k = (int)word.length();
 	for (int i = 0; i < n; i++)
 	{
 		eqflag = true;
