@@ -358,15 +358,20 @@ bool iostream_menu(vector<Student>& studs)
 		show_students(studs);
 		std::cout << "Enter the number of student you want to delete:" << std::endl;
 		std::cin >> answer;
-		if (cin_error_check(std::cin) || answer < 1 || answer > studs.length())
+		if (cin_error_check(std::cin))
 		{
 			std::cout << "Invalid number" << std::endl;
 			system("pause");
 			system("cls");
 			return true;
 		}
-		studs.pop(answer - 1);
-		std::cout << "Successfully deleted" << std::endl; 
+		try {
+			studs.pop(answer - 1);
+			std::cout << "Successfully deleted" << std::endl;
+		}
+		catch (const vector_error& err) {
+			std::cout << "Vector error: " << err.what() << std::endl;
+		}
 		system("pause");
 		system("cls");
 		break;
