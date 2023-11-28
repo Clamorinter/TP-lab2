@@ -76,7 +76,7 @@ bool checker(vector<std::string> words, std::string word)
 		{
 			for (int j = 0; j < k; j++)
 			{
-				if (word[j] != words[i][j])
+				if (word[j] != words[i][j] && word[j] + ('a' - 'A') != words[i][j] && word[j] - ('a' - 'A') != words[i][j])
 				{
 					eqflag = false;
 					break;
