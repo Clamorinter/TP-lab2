@@ -1,6 +1,6 @@
 #include "student.h"
 
-Student::Student() {}
+Student::Student() {};
 Student::Student(std::string FIO, int group, vector<int> score)
 {
 	this->FIO = FIO;
