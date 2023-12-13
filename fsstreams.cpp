@@ -1,5 +1,6 @@
 #pragma once
 #include "fsstreams.h"
+#include <iostream>
 
 std::string vec_to_str(vector<char> vec)
 {
@@ -19,13 +20,18 @@ vector<std::string> sent_seperate(std::ifstream& fin)
 	vector<char> sentence;
 	vector<std::string> sentences;
 	char c;
+	bool flag = false;
 	while ((c = fin.get()) != EOF)
 	{
 		if (c == ' ' && sentence.length() == 0)
 		{
 			continue;
 		}
-		if (c != '\n')
+		if ((c < 'A' || c > 'Z') && sentence.length() == 0)
+		{
+			flag = true;
+		}
+		if (c != '\n' && flag == false)
 		{
 			sentence.push_back(c);
 		}
@@ -33,6 +39,7 @@ vector<std::string> sent_seperate(std::ifstream& fin)
 		{
 			sentences.push_back(vec_to_str(sentence));
 			sentence.clear();
+			flag = false;
 		}
 	}
 	return sentences;
