@@ -3,21 +3,13 @@
 #include <iostream>
 
 double get_arithm_score(Student stud);
-
 void student_bubble_sort(vector<Student>& studs);
-
 bool check_45(Student stud);
-
 bool cin_error_check(std::istream& cin);
-
 void show_students(const vector<Student>& stud);
-
 bool student_menu(Student& stud);
-
 bool iostream_menu(vector<Student>& studs);
-
 bool fsstreams_menu(std::ifstream& fin);
-
 bool menu();
 
 int main(void)
@@ -76,6 +68,31 @@ bool check_45(Student stud)
 	}
 	return true;
 }
+
+/*
+	bool check_45(Student stud)
+{
+	bool fiveflag = false;
+	bool fourflag = false;
+	int n = stud.getScore().length();
+	for (int i = 0; i < n; i++)
+	{
+		if (stud.getScore()[i] == 4)
+		{
+			fourflag = true;
+		} else
+		if (stud.getScore()[i] == 5)
+		{
+			fiveflag = true;
+		}
+		if (fourflag && fiveflag)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+*/
 
 bool cin_error_check(std::istream& cin)
 {
@@ -223,8 +240,11 @@ bool student_menu(Student& stud)
 				system("cls");
 				return true;
 			}
-			stud.add_score(answer);
-			std::cout << "Successfully added." << std::endl;
+			if (answer >= 1 && answer <= 5)
+			{
+				stud.add_score(answer);
+				std::cout << "Successfully added." << std::endl;
+			}
 			system("pause");
 			system("cls");
 			break;
@@ -258,7 +278,7 @@ bool student_menu(Student& stud)
 			std::cin.ignore();
 			while ((c = std::cin.get()))
 			{
-				if (c >= '0' && c <= '9')
+				if (c >= '1' && c <= '5')
 				{
 					score_buf.push_back(c - 48);
 				}
@@ -323,7 +343,7 @@ bool iostream_menu(vector<Student>& studs)
 		std::cin.ignore();
 		while ((c = std::cin.get()))
 		{
-			if (c >= '0' && c <= '9')
+			if (c >= '1' && c <= '5')
 			{
 				score_buf.push_back(c - 48);
 			}
